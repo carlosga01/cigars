@@ -1,12 +1,19 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import MainStack from '/component/navigator/MainStack';
+import AuthProvider from '/provider/AuthProvider';
+import {QueryClientProvider} from 'react-query';
+import {queryClient} from '/react-query/setup';
 
 const AppRoot: React.FC = () => {
   return (
-    <NavigationContainer>
-      <MainStack />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <NavigationContainer>
+          <MainStack />
+        </NavigationContainer>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
 
