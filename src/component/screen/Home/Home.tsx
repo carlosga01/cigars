@@ -1,25 +1,42 @@
 import React from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {Dimensions, FlatList, SafeAreaView, Text, View} from 'react-native';
 import Button from '/component/base/Button';
 import {useNavigation} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Home: React.FC = () => {
+  const {width: windowWidth} = Dimensions.get('window');
+
   const data = [];
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <View
         style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           padding: 12,
         }}>
-        <Text
+        <FastImage
+          source={require('/asset/images/puros.png')}
+          resizeMode="cover"
           style={{
-            fontFamily: 'Lora',
-            fontWeight: 'bold',
-            fontSize: 32,
-          }}>
-          My Reviews
-        </Text>
+            width: windowWidth * 0.25,
+            aspectRatio: 1.51,
+          }}
+        />
+        <Icon
+          name="person"
+          size={24}
+          style={{
+            padding: 12,
+            borderRadius: 24,
+            overflow: 'hidden',
+            backgroundColor: 'rgba(0,0,0,0.1)',
+          }}
+        />
       </View>
       <FlatList
         data={data}
@@ -30,6 +47,7 @@ const Home: React.FC = () => {
           flexGrow: 1,
           alignItems: 'center',
           justifyContent: 'center',
+          marginBottom: 12,
         }}
       />
     </SafeAreaView>

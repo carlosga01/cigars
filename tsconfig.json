@@ -9,6 +9,7 @@
     "paths": {
       "/*": ["./src/*"]
     },
+    "types": ["react-native", "react-native-vector-icons"],
     "typeRoots": [
       "./src/types",
       "node_modules/@types"
