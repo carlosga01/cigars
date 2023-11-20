@@ -15,7 +15,7 @@ export const AuthContext = React.createContext<AuthContextValues>({
 });
 
 const AuthProvider: React.FC = ({children, ...rest}) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const {mutateAsync} = useMutationLoginOrSignUp();
 

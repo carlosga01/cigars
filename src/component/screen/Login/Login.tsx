@@ -1,12 +1,15 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Dimensions, Image, SafeAreaView, View} from 'react-native';
 import Styles from './Login.styles';
 import useAuth from '/hook/useAuth/useAuth';
 import Button from '/component/base/Button';
 import TextInput from '/component/base/TextInput';
+import {useNavigation} from '@react-navigation/native';
+import {MainStackScreens} from '/component/navigator/MainStack/MainStack';
 
 const Login: React.FC = () => {
-  const {authViaEmail} = useAuth();
+  const {authViaEmail, isAuthenticated} = useAuth();
+  const {navigate} = useNavigation<MainStackScreens>();
 
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [loading, setLoading] = useState(false);
@@ -22,6 +25,12 @@ const Login: React.FC = () => {
   }, [authViaEmail, email, password]);
 
   const onToggleMode = () => setMode(mode === 'login' ? 'signup' : 'login');
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('Home');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <SafeAreaView style={Styles.wrapper}>

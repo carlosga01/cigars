@@ -7,7 +7,14 @@ import Login from '/component/screen/Login';
 import NewReview from '/component/screen/NewReview';
 import Profile from '/component/screen/Profile';
 
-const Stack = createNativeStackNavigator();
+export type MainStackScreens = {
+  Login: undefined;
+  Home: undefined;
+  NewReview: undefined;
+  Profile: undefined;
+};
+
+const Stack = createNativeStackNavigator<MainStackScreens>();
 
 const MainStack: React.FC = () => {
   const {isAuthenticated} = useAuth();

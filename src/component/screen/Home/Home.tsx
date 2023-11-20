@@ -1,9 +1,17 @@
 import React from 'react';
-import {Dimensions, FlatList, SafeAreaView, Text, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 import Button from '/component/base/Button';
 import {useNavigation} from '@react-navigation/native';
-import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {MainStackScreens} from '/component/navigator/MainStack/MainStack';
+import Styles from './Home.styles';
 
 const Home: React.FC = () => {
   const {width: windowWidth} = Dimensions.get('window');
@@ -11,44 +19,26 @@ const Home: React.FC = () => {
   const data = [];
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: 12,
-        }}>
-        <FastImage
+    <SafeAreaView style={Styles.container}>
+      <View style={Styles.header}>
+        <Image
           source={require('/asset/images/puros.png')}
           resizeMode="cover"
-          style={{
-            width: windowWidth * 0.25,
-            aspectRatio: 1.51,
-          }}
+          style={[
+            Styles.logo,
+            {
+              width: windowWidth * 0.25,
+            },
+          ]}
         />
-        <Icon
-          name="person"
-          size={24}
-          style={{
-            padding: 12,
-            borderRadius: 24,
-            overflow: 'hidden',
-            backgroundColor: 'rgba(0,0,0,0.1)',
-          }}
-        />
+        <Icon name="person" size={24} style={Styles.profile} />
       </View>
       <FlatList
         data={data}
         scrollEnabled={data.length > 0}
         renderItem={() => <ReviewItem />}
         ListEmptyComponent={EmptyState}
-        contentContainerStyle={{
-          flexGrow: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: 12,
-        }}
+        contentContainerStyle={Styles.listContainer}
       />
     </SafeAreaView>
   );
@@ -59,32 +49,17 @@ const ReviewItem: React.FC = () => {
 };
 
 const EmptyState: React.FC = () => {
-  const navigation = useNavigation();
+  const {navigate} = useNavigation<MainStackScreens>();
 
   return (
-    <View style={{width: '70%'}}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 24,
-          marginBottom: 16,
-        }}>
-        Welcome to{' '}
-        <Text
-          style={{
-            fontFamily: 'Lora',
-            fontWeight: 'bold',
-            fontSize: 24,
-          }}>
-          Puros
-        </Text>
+    <View style={Styles.emptyState}>
+      <Text style={Styles.emptyText}>
+        Welcome to <Text style={Styles.bold}>Puros</Text>
       </Text>
       <Button
         title="Start a review"
-        buttonStyle={{
-          width: '100%',
-        }}
-        onPress={() => navigation.navigate('NewReview')}
+        buttonStyle={Styles.startReview}
+        onPress={() => navigate('NewReview')}
       />
     </View>
   );

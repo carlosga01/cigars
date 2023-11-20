@@ -26,11 +26,12 @@ import {
 import {ImageLibraryOptions} from 'react-native-image-picker/src/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from './NewReview.styles';
+import {MainStackScreens} from '/component/navigator/MainStack/MainStack';
 
 const Window = Dimensions.get('window');
 
 const NewReview: React.FC = () => {
-  const nav = useNavigation();
+  const {goBack} = useNavigation<MainStackScreens>();
 
   const [searchText, setSearchText] = useState('');
 
@@ -95,7 +96,7 @@ const NewReview: React.FC = () => {
                 name="close"
                 size={32}
                 style={Styles.closeButton}
-                onPress={() => nav.goBack()}
+                onPress={goBack}
               />
             </View>
 
