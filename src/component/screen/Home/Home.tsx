@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  Pressable,
 } from 'react-native';
 import Button from '/component/base/Button';
 import {useNavigation} from '@react-navigation/native';
@@ -15,6 +16,8 @@ import Styles from './Home.styles';
 
 const Home: React.FC = () => {
   const {width: windowWidth} = Dimensions.get('window');
+
+  const {navigate} = useNavigation<MainStackScreens>();
 
   const data = [];
 
@@ -31,7 +34,9 @@ const Home: React.FC = () => {
             },
           ]}
         />
-        <Icon name="person" size={24} style={Styles.profile} />
+        <Pressable onPress={() => navigate('Profile')}>
+          <Icon name="person" size={24} style={Styles.profile} />
+        </Pressable>
       </View>
       <FlatList
         data={data}

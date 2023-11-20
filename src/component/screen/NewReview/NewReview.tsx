@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -27,8 +26,6 @@ import {ImageLibraryOptions} from 'react-native-image-picker/src/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from './NewReview.styles';
 import {MainStackScreens} from '/component/navigator/MainStack/MainStack';
-
-const Window = Dimensions.get('window');
 
 const NewReview: React.FC = () => {
   const {goBack} = useNavigation<MainStackScreens>();
@@ -197,10 +194,8 @@ const NewReview: React.FC = () => {
                 jumpValue={0.5}
                 onSwipeRating={setRating}
                 onFinishRating={setRating}
-                imageSize={Window.width / 8}
+                imageSize={50}
                 style={{
-                  height: Window.width / 8,
-                  width: (Window.width / 8) * 5,
                   marginBottom: 8,
                 }}
               />

@@ -20,36 +20,22 @@ const MainStack: React.FC = () => {
   const {isAuthenticated} = useAuth();
 
   return (
-    <Stack.Navigator initialRouteName={isAuthenticated ? 'Home' : 'Login'}>
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="NewReview"
-        component={NewReview}
-        options={{
-          animation: 'slide_from_bottom',
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false,
-        }}
-      />
+    <Stack.Navigator
+      initialRouteName={isAuthenticated ? 'Home' : 'Login'}
+      screenOptions={{headerShown: false}}>
+      {isAuthenticated ? (
+        <>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="NewReview"
+            component={NewReview}
+            options={{animation: 'slide_from_bottom'}}
+          />
+          <Stack.Screen name="Profile" component={Profile} />
+        </>
+      ) : (
+        <Stack.Screen name="Login" component={Login} />
+      )}
     </Stack.Navigator>
   );
 };
